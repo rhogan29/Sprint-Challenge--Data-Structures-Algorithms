@@ -7,12 +7,25 @@ class BinarySearchTree {
 
   depthFirstForEach(cb) {
     /* Your code here */
-    
+    cb(this.value);
+    if(this.left) {
+      this.left.depthFirstForEach(cb);
+    }
+    if(this.right) {
+      this.right.depthFirstForEach(cb);
+    }
   }
 
   breadthFirstForEach(cb) {
     /* Your code here */
+    let list = [this]; // create an array passed with this.
+    for (let i = 0; i < list.length; i++) { // iterate through that array
+      let myNode = list[i]; // set a variable for the current index.
 
+      if(myNode.left) list.push(myNode.left); // if there is a left branch to the index, push it into the array
+      if(myNode.right) list.push(myNode.right); // if there is a right index, push that in as well. 
+      cb(myNode.value); // call the callback on each node, passed with the value.
+    }
   }
 
   insert(value) {
